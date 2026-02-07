@@ -49,6 +49,7 @@ class SandwichMachine:
             if self.machine_resources[ingredient] >= amount:
                 continue
             else:
+                print(f"Sorry, there's not enough {ingredient}.")
                 return False
         return True
 
@@ -64,7 +65,7 @@ class SandwichMachine:
     def transaction_result(self, coins, cost):
         """Return True when the payment is accepted, or False if money is insufficient.
            Hint: use the output of process_coins() function for cost input"""
-        if coins > cost:
+        if coins >= cost:
             return True
         else:
             return False
@@ -72,7 +73,32 @@ class SandwichMachine:
     def make_sandwich(self, sandwich_size, order_ingredients):
         """Deduct the required ingredients from the resources.
            Hint: no output"""
-        for ingredient, amount in resources:
-            amount -= order_ingredients[ingredient]
+        for ingredient, amount in self.machine_resources.items():
+            self.machine_resources[ingredient] = amount - order_ingredients[ingredient]
+
 
 ### Make an instance of SandwichMachine class and write the rest of the codes ###
+maker = SandwichMachine(resources)
+while True:
+    choice = input("What would you like? (small/medium/large/off/report): ")
+    match choice.lower():
+        case "off":
+            exit()
+        case "report":
+            print(f'Bread: {maker.machine_resources["bread"]} slice(s)\n'
+                  f'Ham: {maker.machine_resources["ham"]} slice(s)\n'
+                  f'Cheese: {maker.machine_resources["cheese"]} ounce(s)')
+            continue
+    ingredients = recipes[choice]["ingredients"]
+    cost = recipes[choice]["cost"]
+    if not maker.check_resources(ingredients):
+        continue
+    print("Please insert coins.")
+    amount = maker.process_coins()
+    if maker.transaction_result(amount, cost):
+        print(f'Here is ${amount - cost} in change.')
+    else:
+        print("Sorry, that's not enough money. Money refunded")
+        continue
+    maker.make_sandwich(choice, ingredients)
+    print(f'{choice} sandwich is ready. Bon appetit!')
