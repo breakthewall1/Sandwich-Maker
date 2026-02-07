@@ -75,6 +75,7 @@ class SandwichMachine:
            Hint: no output"""
         for ingredient, amount in self.machine_resources.items():
             self.machine_resources[ingredient] = amount - order_ingredients[ingredient]
+        print(f'{sandwich_size} sandwich is ready. Bon appetit!')
 
 
 ### Make an instance of SandwichMachine class and write the rest of the codes ###
@@ -101,4 +102,3 @@ while True:
         print("Sorry, that's not enough money. Money refunded")
         continue
     maker.make_sandwich(choice, ingredients)
-    print(f'{choice} sandwich is ready. Bon appetit!')
