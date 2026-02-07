@@ -49,7 +49,6 @@ class SandwichMachine:
             if self.machine_resources[ingredient] >= amount:
                 continue
             else:
-                print(f'Sorry, there is not enough {ingredient}.')
                 return False
         return True
 
@@ -65,9 +64,14 @@ class SandwichMachine:
     def transaction_result(self, coins, cost):
         """Return True when the payment is accepted, or False if money is insufficient.
            Hint: use the output of process_coins() function for cost input"""
+        if coins > cost:
+            return True
+        else:
+            return False
 
     def make_sandwich(self, sandwich_size, order_ingredients):
         """Deduct the required ingredients from the resources.
            Hint: no output"""
+        
 
 ### Make an instance of SandwichMachine class and write the rest of the codes ###
