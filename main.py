@@ -72,6 +72,7 @@ class SandwichMachine:
     def make_sandwich(self, sandwich_size, order_ingredients):
         """Deduct the required ingredients from the resources.
            Hint: no output"""
-        
+        for ingredient, amount in resources:
+            amount -= order_ingredients[ingredient]
 
 ### Make an instance of SandwichMachine class and write the rest of the codes ###
