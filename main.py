@@ -49,12 +49,18 @@ class SandwichMachine:
             if self.machine_resources[ingredient] >= amount:
                 continue
             else:
+                print(f'Sorry, there is not enough {ingredient}.')
                 return False
         return True
 
     def process_coins(self):
         """Returns the total calculated from coins inserted.
            Hint: include input() function here, e.g. input("how many quarters?: ")"""
+        dollars = int(input("How many dollars?: "))
+        half = int(input("How many half-dollars?: "))
+        quarter = int(input("How many quarters?: "))
+        nickel = int(input("How many nickels?: "))
+        return dollars + half * 0.5 + quarter * 0.25 + nickel * 0.05
 
     def transaction_result(self, coins, cost):
         """Return True when the payment is accepted, or False if money is insufficient.
